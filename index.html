@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gyro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-dark: #0e0e0e;
+      --card-bg: #1a1a1a;
+      --text-color: #f4f4f4;
+      --accent: #f5c673;
+      --overlay-bg: rgba(0, 0, 0, 0.5);
+      --radius: 18px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-color);
+      padding-top: 100px;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1b1b1b;
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    nav:hover {
+      transform: translateX(-50%) scale(1.02);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin-right: auto;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Game grid */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .game-card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: var(--overlay-bg);
+      color: #fff;
+      padding: 12px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 1.1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 14px 24px;
+      }
+      .logo {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Gyro</div>
+    <a href="#">Home</a>
+    <a href="#">Games</a>
+    <a href="#">About</a>
+  </nav>
+
+  <div class="container">
+    <div class="game-card" onclick="window.location.href='game1.html'">
+      <img src="https://via.placeholder.com/400x200?text=Game+1" alt="Game 1">
+      <div class="overlay">Cool Math Runner</div>
+    </div>
+    <div class="game-card" onclick="window.location.href='game2.html'">
+      <img src="https://via.placeholder.com/400x200?text=Game+2" alt="Game 2">
+      <div class="overlay">Tunnel Escape</div>
+    </div>
+    <div class="game-card" onclick="window.location.href='game3.html'">
+      <img src="https://via.placeholder.com/400x200?text=Game+3" alt="Game 3">
+      <div class="overlay">Space Dodger</div>
+    </div>
+    <!-- Add more games as needed -->
+  </div>
+
+</body>
+</html>
