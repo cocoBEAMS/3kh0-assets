@@ -4,7 +4,7 @@
    CONFIG
 ══════════════════════════════════════════ */
 const GAMES_JSON = 'games.json';
-const GAMES_DIR  = 'games';
+const GAMES_DIR  = '';
 const MAX_RECENTS = 20;
 
 /* ══════════════════════════════════════════
