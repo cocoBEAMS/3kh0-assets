@@ -291,7 +291,7 @@
   { "name": "Zombs Royale",               "slug": "zombs-royale",             "url": "zombs-royale/",             "tags": ["battle royale","io","shooting"],   "span": "s2x2", "badge": "hot"  },
   { "name": "Polytrack",                  "slug": "polytrackub",              "url": "polytrackub/",              "tags": ["racing","3d"],                     "span": "s1x1", "badge": null   },
   { "name": "Brawl Stars",                "slug": "brawlstarsub",             "url": "brawlstarsub/",             "tags": ["pvp","2d"],                        "span": "s1x1", "badge": null   },
-  { "name": "Funny Shooter 2",            "slug": "funnyshooter2",            "url": "funnyshooter2/",            "tags": ["pvp","3d"],                        "span": "s1x1", "badge": "new"  },
+  { "name": "Funny Shooter 2",            "slug": "funnyshooter2",            "url": "funnyshooter/",            "tags": ["pvp","3d"],                        "span": "s1x1", "badge": "new"  },
   { "name": "MR Racer",                   "slug": "mrracerub",                "url": "mrracerub/",                "tags": ["racing","3d"],                     "span": "s1x1", "badge": "new"  },
   { "name": "Space Waves",                "slug": "spacewaves",               "url": "spacewaves/",               "tags": ["platformer","2d"],                 "span": "s1x1", "badge": "new"  },
   { "name": "Crazy Cars",                 "slug": "crazycars",                "url": "crazycars/",                "tags": ["racing","3d"],                     "span": "s1x1", "badge": "hot"  }
