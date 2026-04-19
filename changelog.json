@@ -1,0 +1,39 @@
+{
+  "version": "2026.04",
+  "enabled": true,
+  "entries": [
+    {
+      "version": "2026.04",
+      "date": "April 2026",
+      "title": "Spring Update",
+      "changes": [
+        { "type": "new",  "text": "Added Polytrack — race through wild tracks" },
+        { "type": "new",  "text": "Vex 7 is now live" },
+        { "type": "hot",  "text": "Drive Mad marked as a staff pick" },
+        { "type": "fix",  "text": "Fixed card layout breaking on small screens" },
+        { "type": "fix",  "text": "Search now finds games by tag correctly" }
+      ]
+    },
+    {
+      "version": "2026.03",
+      "date": "March 2026",
+      "title": "Grid Overhaul",
+      "changes": [
+        { "type": "new",  "text": "Card size setting added (Small / Medium / Large)" },
+        { "type": "new",  "text": "Recently Played strip on homepage" },
+        { "type": "new",  "text": "Favorites panel with persistent storage" },
+        { "type": "fix",  "text": "Tab cloak presets now apply favicon correctly" }
+      ]
+    },
+    {
+      "version": "2026.02",
+      "date": "February 2026",
+      "title": "Launch",
+      "changes": [
+        { "type": "new",  "text": "JaguarUBG goes live with 100+ games" },
+        { "type": "new",  "text": "Panic Key, Blank Tab, and Tab Cloak in Settings" },
+        { "type": "new",  "text": "Dark theme system with Obsidian, Ash, Midnight" }
+      ]
+    }
+  ]
+}
