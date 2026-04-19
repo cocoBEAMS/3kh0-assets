@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog — JaguarUBG</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23141414'/><text x='16' y='23' text-anchor='middle' font-size='18'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --s1:      #161616;
+      --s2:      #1c1c1c;
+      --s3:      #242424;
+      --s4:      #2c2c2c;
+      --border:  #242424;
+      --border2: #303030;
+      --text:    #e8e8e8;
+      --muted:   #666;
+      --dim:     #3a3a3a;
+      --font:    'Space Grotesk', sans-serif;
+      --mono:    'Space Mono', monospace;
+      --radius:  12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 14px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      width: min(920px, calc(100vw - 24px));
+      height: 50px;
+      background: rgba(16,16,16,0.9);
+      border: 1px solid var(--border2);
+      border-radius: 18px;
+      backdrop-filter: blur(20px) saturate(1.6);
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+    }
+    .nb-logo {
+      font-size: 15px; font-weight: 700;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 5px;
+      white-space: nowrap; flex-shrink: 0; letter-spacing: -0.3px;
+    }
+    .nb-logo span { color: var(--muted); font-weight: 500; }
+    .nb-sep { width: 1px; height: 18px; background: var(--border2); flex-shrink: 0; }
+    .nb-page { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.2px; }
+    .nb-back {
+      margin-left: auto;
+      height: 32px; padding: 0 14px;
+      border-radius: 8px;
+      background: var(--s2); border: 1px solid var(--border);
+      color: var(--muted); font-family: var(--font);
+      font-size: 11px; font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+      cursor: pointer; text-decoration: none;
+      transition: color .12s, background .12s, border-color .12s;
+    }
+    .nb-back:hover { color: var(--text); background: var(--s3); border-color: var(--border2); }
+    .nb-back svg { width: 12px; height: 12px; }
+
+    /* ── PAGE ── */
+    .page { padding-top: 78px; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px; margin: 0 auto;
+      padding: 64px 24px 48px;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 10px;
+      font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 24px; height: 1px; background: var(--border2);
+    }
+    .hero-title {
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 700; letter-spacing: -2.5px;
+      line-height: 0.95; margin-bottom: 18px;
+      color: var(--text);
+    }
+    .hero-title span { color: var(--muted); }
+    .hero-sub {
+      font-size: 13px; color: var(--muted);
+      font-weight: 400; line-height: 1.8;
+      max-width: 380px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 760px; margin: 0 auto 48px;
+      padding: 0 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── CHANGELOG ENTRIES ── */
+    .entries {
+      max-width: 760px; margin: 0 auto;
+      padding: 0 24px 80px;
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+      animation: entryIn .4s ease both;
+    }
+    .entry:first-child { padding-top: 0; }
+
+    @keyframes entryIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .entry-meta {
+      padding-top: 2px;
+    }
+    .entry-version {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 700;
+      color: var(--text);
+      background: var(--s2); border: 1px solid var(--border2);
+      border-radius: 6px; padding: 3px 9px;
+      display: inline-block; margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+    .entry-date {
+      font-size: 10px; font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.8px;
+      display: block; margin-bottom: 6px;
+    }
+    .entry-title-side {
+      font-size: 11px; font-weight: 600; color: var(--dim);
+      display: block;
+    }
+
+    .entry-content {}
+    .entry-title {
+      font-size: 20px; font-weight: 700;
+      letter-spacing: -0.6px; color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .cl-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .cl-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color .15s, background .15s;
+    }
+    .cl-item:hover { border-color: var(--border2); background: var(--s1); }
+
+    .cl-tag {
+      font-size: 8px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      border-radius: 4px; padding: 2px 7px;
+      flex-shrink: 0; margin-top: 2px;
+      white-space: nowrap;
+    }
+    .cl-tag.new  { background: rgba(126,184,247,0.12); color: #7eb8f7; border: 1px solid rgba(126,184,247,0.15); }
+    .cl-tag.hot  { background: rgba(200,48,28,0.16);   color: #e05030; border: 1px solid rgba(200,48,28,0.2);   }
+    .cl-tag.fix  { background: rgba(255,255,255,0.05); color: #555;    border: 1px solid rgba(255,255,255,0.06);}
+
+    .cl-text { font-size: 13px; font-weight: 400; color: #aaa; line-height: 1.55; }
+
+    /* ── EMPTY / ERROR ── */
+    .cl-error {
+      text-align: center; padding: 64px 0;
+      color: var(--muted); font-size: 13px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .entry { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+      .entry-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .entry-title-side { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="nb-logo" href="index.html">🐆 <strong>Jaguar</strong><span>UBG</span></a>
+    <div class="nb-sep"></div>
+    <span class="nb-page">Changelog</span>
+    <a class="nb-back" href="index.html">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M8 2L4 6l4 4"/>
+      </svg>
+      Back to games
+    </a>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="page">
+
+    <div class="hero">
+      <div class="hero-eyebrow">Release Notes</div>
+      <h1 class="hero-title">What's<br><span>Changed.</span></h1>
+      <p class="hero-sub">Every update to JaguarUBG — new games, fixes, and improvements — documented here.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="entries" id="entries">
+      <div class="cl-error">Loading changelog…</div>
+    </div>
+
+  </div>
+
+  <script>
+    const TYPE = {
+      new: 'new',
+      hot: 'hot',
+      fix: 'fix',
+    };
+
+    async function loadChangelog() {
+      const container = document.getElementById('entries');
+      let data;
+      try {
+        const res = await fetch('changelog.json?t=' + Date.now());
+        data = await res.json();
+      } catch {
+        container.innerHTML = '<div class="cl-error">Could not load changelog.json.</div>';
+        return;
+      }
+
+      if (!data.entries?.length) {
+        container.innerHTML = '<div class="cl-error">No entries yet.</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+
+      data.entries.forEach((entry, i) => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.style.animationDelay = `${i * 60}ms`;
+
+        const items = (entry.changes || []).map(c => {
+          const tag = TYPE[c.type] || 'fix';
+          return `<li class="cl-item">
+            <span class="cl-tag ${tag}">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>
+            <span class="cl-text">${c.text}</span>
+          </li>`;
+        }).join('');
+
+        div.innerHTML = `
+          <div class="entry-meta">
+            <span class="entry-version">${entry.version}</span>
+            <span class="entry-date">${entry.date}</span>
+            <span class="entry-title-side">${entry.title}</span>
+          </div>
+          <div class="entry-content">
+            <div class="entry-title">${entry.title}</div>
+            <ul class="cl-list">${items}</ul>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    loadChangelog();
+  </script>
+
+</body>
+</html>
