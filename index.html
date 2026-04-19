@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JaguarUBG — Unblocked Games</title>
+  <link rel="icon" id="favicon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23141414'/><text x='16' y='23' text-anchor='middle' font-size='18'>🐆</text></svg>">
+  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── SLIM HERO ── */
+    .hero-slim {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 24px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: heroIn .4s ease both;
+    }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .hs-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+    .hs-logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .hs-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--border2);
+      flex-shrink: 0;
+    }
+    .hs-splash {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 340px;
+      animation: splashIn .5s .15s ease both;
+      opacity: 0;
+    }
+    @keyframes splashIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .hs-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .hero-slim .btn-primary,
+    .hero-slim .btn-ghost {
+      font-size: 11px;
+      padding: 8px 14px;
+    }
+    @media (max-width: 500px) {
+      .hs-splash { display: none; }
+      .hs-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ TOAST ══ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ══ FLOATING NAVBAR ══ -->
+  <nav class="navbar" id="navbar">
+    <a class="nb-logo" href="#">🐆 <strong>Jaguar</strong><span>UBG</span></a>
+    <div class="nb-center">
+      <button class="nb-search-trigger" id="navSearch">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="18" y2="18"/></svg>
+        <span>Search games…</span>
+        <kbd>⌘K</kbd>
+      </button>
+    </div>
+    <div class="nb-right">
+      <button class="nb-btn" id="navRecents" title="Recently Played">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="10" cy="10" r="7"/><polyline points="10,6 10,10 13,12"/></svg>
+      </button>
+      <button class="nb-btn" id="navFavs" title="Favorites">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16s-7-4.5-7-9a4 4 0 0 1 7-2.65A4 4 0 0 1 17 7c0 4.5-7 9-7 9z"/></svg>
+      </button>
+      <button class="nb-btn" id="navSettings" title="Settings">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="10" cy="10" r="2.5"/><path d="M16.2 12.5a1.4 1.4 0 0 0 .28 1.54l.05.05a1.7 1.7 0 0 1-2.4 2.4l-.05-.05a1.4 1.4 0 0 0-1.54-.28 1.4 1.4 0 0 0-.85 1.28V18a1.7 1.7 0 0 1-3.4 0v-.08a1.4 1.4 0 0 0-.91-1.28 1.4 1.4 0 0 0-1.54.28l-.05.05a1.7 1.7 0 0 1-2.4-2.4l.05-.05a1.4 1.4 0 0 0 .28-1.54 1.4 1.4 0 0 0-1.28-.85H2a1.7 1.7 0 0 1 0-3.4h.07a1.4 1.4 0 0 0 1.28-.91 1.4 1.4 0 0 0-.28-1.54l-.05-.05a1.7 1.7 0 0 1 2.4-2.4l.05.05a1.4 1.4 0 0 0 1.54.28h.06a1.4 1.4 0 0 0 .85-1.28V2a1.7 1.7 0 0 1 3.4 0v.07a1.4 1.4 0 0 0 .85 1.28 1.4 1.4 0 0 0 1.54-.28l.05-.05a1.7 1.7 0 0 1 2.4 2.4l-.05.05a1.4 1.4 0 0 0-.28 1.54v.06a1.4 1.4 0 0 0 1.28.85H18a1.7 1.7 0 0 1 0 3.4h-.07a1.4 1.4 0 0 0-1.28.85z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ SEARCH MODAL ══ -->
+  <div class="modal-backdrop" id="searchBackdrop">
+    <div class="search-modal">
+      <div class="sm-input-row">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="18" y2="18"/></svg>
+        <input id="searchInput" type="text" placeholder="Search games…" autocomplete="off" spellcheck="false" />
+        <button id="searchClose">ESC</button>
+      </div>
+      <div class="sm-divider"></div>
+      <div class="sm-results" id="searchResults">
+        <p class="sm-hint">Start typing to search across all games</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RECENTLY PLAYED PANEL ══ -->
+  <div class="drawer-backdrop" id="recentsBackdrop"></div>
+  <aside class="side-panel" id="recentsPanel">
+    <div class="sp-head">
+      <span>Recently Played</span>
+      <button id="recentsClose"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="15" y1="5" x2="5" y2="15"/><line x1="5" y1="5" x2="15" y2="15"/></svg></button>
+    </div>
+    <div class="sp-body" id="recentsList">
+      <p class="sp-empty">No games played yet. Go play something!</p>
+    </div>
+  </aside>
+
+  <!-- ══ FAVORITES PANEL ══ -->
+  <div class="drawer-backdrop" id="favsBackdrop"></div>
+  <aside class="side-panel" id="favsPanel">
+    <div class="sp-head">
+      <span>Favorites</span>
+      <button id="favsClose"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="15" y1="5" x2="5" y2="15"/><line x1="5" y1="5" x2="15" y2="15"/></svg></button>
+    </div>
+    <div class="sp-body" id="favsList">
+      <p class="sp-empty">No favorites yet. Click ♥ on a game card to save it.</p>
+    </div>
+  </aside>
+
+  <!-- ══ SETTINGS DRAWER ══ -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="settings-drawer" id="settingsDrawer">
+    <div class="sd-head">
+      <span>Settings</span>
+      <button id="settingsClose"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="15" y1="5" x2="5" y2="15"/><line x1="5" y1="5" x2="15" y2="15"/></svg></button>
+    </div>
+
+    <div class="sd-section">
+      <div class="sd-label">Tab Cloak</div>
+      <div class="sd-sub">Change what this tab looks like in the browser bar.</div>
+      <div class="sd-presets">
+        <button class="preset-btn active" data-title="JaguarUBG — Unblocked Games" data-icon="">Default</button>
+        <button class="preset-btn" data-title="Google" data-icon="https://www.google.com/favicon.ico">Google</button>
+        <button class="preset-btn" data-title="Canvas" data-icon="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">Canvas</button>
+        <button class="preset-btn" data-title="Schoology" data-icon="https://asset-cdn.schoology.com/sites/all/themes/schoology_theme/favicon.ico">Schoology</button>
+        <button class="preset-btn" data-title="Khan Academy" data-icon="https://cdn.kastatic.org/images/favicon.ico">Khan</button>
+        <button class="preset-btn" data-title="Google Docs" data-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">Docs</button>
+        <button class="preset-btn" data-title="Outlook" data-icon="https://outlook.live.com/favicon.ico">Outlook</button>
+      </div>
+      <div class="sd-fields">
+        <input type="text" id="cloakTitle" placeholder="Custom title…" />
+        <input type="text" id="cloakIcon"  placeholder="Custom favicon URL…" />
+        <button class="sd-apply" id="cloakApply">Apply</button>
+      </div>
+    </div>
+
+    <div class="sd-section">
+      <div class="sd-label">Blank Tab</div>
+      <div class="sd-sub">Opens this site inside <code>about:blank</code> — URL bar shows nothing.</div>
+      <button class="sd-action" id="blankTabBtn">Open in Blank Tab</button>
+    </div>
+
+    <div class="sd-section">
+      <div class="sd-label">Panic Key</div>
+      <div class="sd-sub">One keypress redirects the tab instantly — even mid-game.</div>
+      <div class="sd-panic">
+        <button class="preset-btn" id="panicKeyBtn">Key: <span id="panicKeyLabel">Escape</span></button>
+        <input type="text" id="panicUrl" value="https://classroom.google.com" placeholder="Redirect URL…" />
+      </div>
+    </div>
+
+    <div class="sd-section">
+      <div class="sd-label">Theme</div>
+      <div class="sd-sub">Switch between dark and darker.</div>
+      <div class="sd-presets">
+        <button class="preset-btn active" id="themeDefault">Obsidian</button>
+        <button class="preset-btn" id="themeAsh">Ash</button>
+        <button class="preset-btn" id="themeMidnight">Midnight</button>
+      </div>
+    </div>
+
+    <div class="sd-section">
+      <div class="sd-label">Card Size</div>
+      <div class="sd-sub">Change how big game cards appear in the grid.</div>
+      <div class="sd-presets">
+        <button class="preset-btn" id="sizeSmall">Small</button>
+        <button class="preset-btn active" id="sizeMedium">Medium</button>
+        <button class="preset-btn" id="sizeLarge">Large</button>
+      </div>
+    </div>
+
+    <div class="sd-section">
+      <div class="sd-label">Danger Zone</div>
+      <div class="sd-sub">Clear your saved data.</div>
+      <button class="sd-action sd-danger" id="clearDataBtn">Clear History &amp; Favorites</button>
+    </div>
+  </aside>
+
+  <!-- ══ GAME VIEWER ══ -->
+  <div class="game-viewer" id="gameViewer">
+    <div class="gv-bar">
+      <button class="gv-btn" id="gvClose" title="Close">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="15" y1="5" x2="5" y2="15"/><line x1="5" y1="5" x2="15" y2="15"/></svg>
+      </button>
+      <span class="gv-title" id="gvTitle"></span>
+      <div class="gv-actions">
+        <button class="gv-btn" id="gvFav" title="Favorite">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16s-7-4.5-7-9a4 4 0 0 1 7-2.65A4 4 0 0 1 17 7c0 4.5-7 9-7 9z"/></svg>
+        </button>
+        <button class="gv-btn" id="gvPopout" title="Pop Out">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M14 3h3v3M10 10l7-7M8 5H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3"/></svg>
+        </button>
+        <button class="gv-btn" id="gvFullscreen" title="Fullscreen">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M7 3H3v4M17 3h-4M3 13v4h4M13 17h4v-4"/></svg>
+        </button>
+      </div>
+    </div>
+    <iframe id="gameFrame" src="" allowfullscreen></iframe>
+  </div>
+
+  <!-- ══ PAGE ══ -->
+  <div class="page">
+
+    <!-- SLIM HERO -->
+    <section class="hero-slim">
+      <div class="hs-left">
+        <span class="hs-logo">🐆 <strong>JaguarUBG</strong></span>
+        <span class="hs-divider"></span>
+        <span class="hs-splash" id="splashText"></span>
+      </div>
+      <div class="hs-right">
+        <button class="btn-primary" id="heroPlay">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 3l10 5-10 5V3z"/></svg>
+          Random
+        </button>
+        <button class="btn-ghost" id="heroSearch">Browse</button>
+      </div>
+    </section>
+
+    <!-- RECENTLY PLAYED STRIP (shown when history exists) -->
+    <section class="strip-section" id="recentStrip" style="display:none">
+      <div class="strip-head">
+        <span class="strip-label">Continue Playing</span>
+        <button class="strip-more" id="recentStripMore">See all →</button>
+      </div>
+      <div class="strip-row" id="recentStripRow"></div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <div class="categories" id="categories">
+      <button class="cat active" data-cat="all">All</button>
+      <button class="cat" data-cat="racing">Racing</button>
+      <button class="cat" data-cat="action">Action</button>
+      <button class="cat" data-cat="puzzle">Puzzle</button>
+      <button class="cat" data-cat="sports">Sports</button>
+      <button class="cat" data-cat="idle">Idle</button>
+      <button class="cat" data-cat="multiplayer">Multiplayer</button>
+      <button class="cat" data-cat="platform">Platform</button>
+      <button class="cat" data-cat="strategy">Strategy</button>
+      <button class="cat" data-cat="horror">Horror</button>
+      <button class="cat" data-cat="rhythm">Rhythm</button>
+    </div>
+
+    <!-- SORT + VIEW CONTROLS -->
+    <div class="grid-controls">
+      <span class="game-count" id="gameCount"></span>
+      <div class="sort-group">
+        <select id="sortSelect">
+          <option value="default">Sort: Default</option>
+          <option value="az">A → Z</option>
+          <option value="za">Z → A</option>
+          <option value="hot">Hot First</option>
+          <option value="new">New First</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- GAMES GRID -->
+    <section class="games-section">
+      <div class="grid" id="gameGrid"></div>
+      <div class="no-results" id="noResults" style="display:none">
+        <span>No games found</span>
+        <button class="btn-ghost" onclick="document.querySelector('.cat').click()">Reset filters</button>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-left">
+      <div class="faq-badge">
+        <div class="faq-badge-dot"></div>
+        <span>About JaguarUBG</span>
+      </div>
+      <h2 class="faq-headline">The BEST<br>Unblocked games site</h2>
+      <p class="faq-body-text">Jaguar UBG is an unblocked games site that offers just games with no additional strings attached. Best of all, there is no ads! Enjoy the site!</p>
+      <p class="faq-body-text">Games are served directly through our hosting so nothing gets flagged. We're always adding more.</p>
+      <div class="faq-divider"></div>
+      <div class="faq-stats">
+        <div class="faq-stat"><strong id="statGames">20+</strong><span>Games</span></div>
+        <div class="faq-stat"><strong>0</strong><span>Downloads</span></div>
+        <div class="faq-stat"><strong>100%</strong><span>Free</span></div>
+      </div>
+    </div>
+    <div class="faq-right">
+      <div class="faq-label">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><circle cx="7" cy="7" r="5.5"/><line x1="7" y1="5" x2="7" y2="7.5"/><circle cx="7" cy="9.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        FAQ
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What is JaguarUBG?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="2" x2="5" y2="8"/><line x1="2" y1="5" x2="8" y2="5"/></svg></span></button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-a">A free unblocked games site. Every game runs in your browser — no installs, no accounts, no ads.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Why are games not blocked at school?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="2" x2="5" y2="8"/><line x1="2" y1="5" x2="8" y2="5"/></svg></span></button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-a">JaguarUBG hosts everything locally — no external requests, no blocks. School filters have nothing to flag.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How do I hide the tab?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="2" x2="5" y2="8"/><line x1="2" y1="5" x2="8" y2="5"/></svg></span></button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-a">Open Settings → Tab Cloak. Pick a preset like Google or Canvas, or enter a custom title and favicon URL.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What is the Panic Key?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="2" x2="5" y2="8"/><line x1="2" y1="5" x2="8" y2="5"/></svg></span></button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-a">One keypress redirects the whole tab instantly — even mid-game, even fullscreen. Set it in Settings.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Is it open source?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="2" x2="5" y2="8"/><line x1="2" y1="5" x2="8" y2="5"/></svg></span></button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-a">No, Jaguar UBG is NOT open source because we want to prevent low effort clones of our site being deployed on the web. Some parts of our source MAY be available in the future.</div></div></div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-q"><span>Does it work on mobile?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="2" x2="5" y2="8"/><line x1="2" y1="5" x2="8" y2="5"/></svg></span></button>
+        <div class="faq-body"><div class="faq-body-inner"><div class="faq-a">Fully responsive layout. Games vary — many have touch controls, some are keyboard-only.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- FOOTER -->
+    <div class="footer-wrap">
+      <footer class="footer">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <span class="footer-logo">🐆 JaguarUBG</span>
+            <p>The fastest unblocked games site. Play anything, anywhere, on any network.</p>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">Site</span>
+            <a href="#">Home</a>
+            <a href="#" id="footerSettings">Settings</a>
+            <a href="#" id="footerFavs">Favorites</a>
+            <a href="changelog.html">Changelog</a>
+            <a href="request.html">Request a Game</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">Games</span>
+            <a href="#" onclick="filterCat('racing')">Racing</a>
+            <a href="#" onclick="filterCat('action')">Action</a>
+            <a href="#" onclick="filterCat('puzzle')">Puzzle</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">Tools</span>
+            <a href="#" id="footerCloak">Tab Cloak</a>
+            <a href="#" id="footerBlank">Blank Tab</a>
+            <a href="#" id="footerRandom">Random Game</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 JaguarUBG — No ads. No trackers. Just games.</span>
+          <span class="footer-build" id="footerBuild"></span>
+        </div>
+      </footer>
+    </div>
+
+  </div><!-- /page -->
+
+  <script src="app.js"></script>
+  <script src="popup.js" defer></script>
+  <script>
+    async function loadSplash() {
+      const el = document.getElementById('splashText');
+      if (!el) return;
+      try {
+        const res  = await fetch('splash.json?t=' + Date.now());
+        const data = await res.json();
+        const list = data.splashes || [];
+        if (!list.length) return;
+        el.textContent = list[Math.floor(Math.random() * list.length)];
+      } catch {
+        el.textContent = 'No installs. No excuses.';
+      }
+    }
+    loadSplash();
+  </script>
+</body>
+</html>
